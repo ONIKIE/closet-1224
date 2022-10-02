@@ -20,6 +20,26 @@
        </div>
        <% end %>
     <%# // ログインしているときは上記を表示する %>
+    <div class='item-contents'>
+    <h2 class='title'></h2>
+    <div class="subtitle" >
+
+    </div>
+    <ul class='item-lists'>
+  <% if user_signed_in?%>
+
     <div class="item__wrapper">
+    <ul class='item-lists'>
+    <% @items.each do |item| %>
+    <% if current_user.id == item.user_id %>
+    <li class='list'>
+        <%= link_to item_path(item.id) do %>
+     <div class='item-img-content'>
+          <%= image_tag item.image, class: "item-img" %>
+     <% end %>
+     <% end %>
+  <% end %>
+  <% end %>
+  </div>
   </div>
 </main>
