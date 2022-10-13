@@ -1,0 +1,55 @@
+ <header class="items-create-header">
+    <%#= link_to image_tag('item.png' , size: '185x50'), "/" %>
+
+  </header>
+  <div class="items-create-main">
+    <h2 class="items-create-title">アイテムの情報を編集する</h2>
+    <%= form_with(model: @item, local: true) do |f| %>
+    <%#= render 'shared/error_messages', model: f.object %>
+
+    <%# アイテム画像 %>
+    <div class="img-upload">
+      <div class="weight-bold-text">
+        アイテム画像
+        <span class="indispensable">必須</span>
+      </div>
+      <div class="click-upload">
+        <p>
+          クリックしてファイルをアップロード
+        </p>
+        <%= f.file_field :image, id:"item-image" %>
+      </div>
+    </div>
+
+    <%# アイテムの詳細 %>
+    <div class="items-detail">
+      <div class="weight-bold-text">アイテムの詳細</div>
+      <div class="form">
+        <div class="weight-bold-text">
+          カテゴリー
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %>
+        <div class="weight-bold-text">
+          タイプ
+          <span class="indispensable">任意</span>
+        </div>
+        <%= f.collection_select(:type_id, Type.all, :id, :name, {}, {class:"select-box", id:"item-sales-status"}) %>
+        <div class="weight-bold-text">
+        タグ
+        <span class="indispensable">必須</span>
+        </div>
+        <%= form_with model:@item, local: true do |f| %>
+        <%= f.text_field :tag_ids, class: "select-box", id:'tag_ids',\
+          placeholder: "タグを複数つけるには','で区切ってください。" %>
+      </div>
+    </div>
+    <%# 下部ボタン %>
+    <div class="create-btn-contents">
+      <%= f.submit "編集する", class:"create-btn" %>
+      <%=link_to 'もどる', item_path(@item[:id]), class:"back-btn" %>
+    </div>
+    <%# /下部ボタン %>
+  </div>
+  <% end %>
+  <% end %>

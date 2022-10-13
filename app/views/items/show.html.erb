@@ -1,0 +1,46 @@
+<div class="item-show">
+  <div class="item-box">
+    <div class="item-img-content">
+      <%= image_tag @item.image ,class:"item-box-img" %>
+
+    </div>
+
+        <table class="detail-table">
+      <tbody>
+        <tr>
+          <th class="detail-item">カテゴリー</th>
+          <td class="detail-value"><%= @item.category.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">タイプ</th>
+          <td class="detail-value"><%= @item.type.name %></td>
+        </tr>
+        
+        
+      </tbody>
+    </table>
+    <table class="detail-tagtable">
+    <tbody>
+    <tr>
+          <th class="detail-tagitem">タグ</th>
+          <% @item.tags.each do |tag| %>
+          <td class="detail-tagvalue"><%= tag.name %></td>
+          <% end %>
+        </tr>
+        </tbody>
+    </table>
+
+    
+
+    <% if user_signed_in? %> 
+
+    <% if current_user.id == @item.user_id %> 
+      <%= link_to '商品の編集', edit_item_path(@item), method: :get, class: "item-red-btn" %>
+      <p class='or-text'>or</p>
+      <%= link_to '削除', item_path, method: :delete, class:'item-destroy' %>
+      <% end %>
+      <% end%>
+  </div>
+</div>
+
+ 
