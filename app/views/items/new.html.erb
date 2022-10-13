@@ -36,6 +36,13 @@
           <span class="indispensable">任意</span>
         </div>
         <%= f.collection_select(:type_id, Type.all, :id, :name, {}, {class:"select-box", id:"item-sales-status"}) %>
+        <div class="weight-bold-text">
+        タグ
+        <span class="indispensable">必須</span>
+        </div>
+        <%= form_with model:@item, local: true do |f| %>
+        <%= f.text_field :tag_ids, class: "select-box", id:'tag_ids',\
+          placeholder: "タグを複数つけるには','で区切ってください。" %>
       </div>
     </div>
     <%# 下部ボタン %>
@@ -46,3 +53,4 @@
     <%# /下部ボタン %>
   </div>
   <% end %>
+   <% end %>
